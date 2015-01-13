@@ -1,0 +1,15 @@
+.crossClear {
+    background: url("/images/roundCross100.png") no-repeat scroll right center rgba(0, 0, 0, 0) !important;
+    padding-right: 1%;
+    cursor: pointer;
+    -o-background-size: 18px;
+    -moz-background-size: 18px auto;
+    -webkit-background-size:18px;
+    background-size: 18px;
+}
+.noTextClear {	
+    padding-right: 1%;
+}
+input::-ms-clear {
+    display: none;
+}
