@@ -14,7 +14,9 @@ html
   body
     div.container
         h3.lead #{LoginTitleText}
-        form(role="form",autocomplete="off")    
+        form#customerForm(role="form",autocomplete="off")    
+            input#cid.span3(type='hidden', value='', placeholder='first name', required='required')  
+            br
             input#fname.span3(type='text', value='', placeholder='first name', required='required')  
             br
             input#lname.span3(type='text', value='', placeholder='last name', required='required')

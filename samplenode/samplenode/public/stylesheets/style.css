@@ -13,3 +13,7 @@
 input::-ms-clear {
     display: none;
 }
+
+.btn {
+    margin: 2px;
+}
