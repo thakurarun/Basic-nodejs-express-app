@@ -5,10 +5,11 @@ var customerRepo = require('./../server/controller/Customer');
 router.get('/', function(req, res) {
     res.render('index', {title: 'Customer' ,LoginTitleText: 'Register yourself'});
 });
-
 router.post('/postuser', function(req, res) {
-   customerRepo.insertCustomer(req.body)
+   customerRepo.insertCustomer(req.body);
    res.status(200).send({success:true, message:'We got it.'});
 });
-
+router.get('/listcustomer', function(req, res) {
+    return customerRepo.getAllCustomer(req, res);
+});
 module.exports = router;

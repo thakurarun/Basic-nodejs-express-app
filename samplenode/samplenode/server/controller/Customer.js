@@ -1,13 +1,28 @@
-var db = require('../model/CustomerModel').db;
 
-exports.insertCustomer = function InsertCustomer(Customer,callback){
-   // console.log(JSON.stringify(Customer));
-//    _Customer.fname = Customer.fname;
-//    _Customer.lname = Customer.lname;
-//    _Customer.email = Customer.email;
-    var customers = db.collection('customers')
-    customers.insert({ Customer},function(obj,customers){
-        console.log(obj);
-    })
-   //customerDb.insert(Customer);
+var mongoose = require('mongoose')
+var customer = require('../model/CustomerModel');
+
+exports.insertCustomer = function InsertCustomer(_Customer,callback){ 
+    var c = new customer(_Customer);
+    c.save(function(err,customer){
+        if(err)
+            return console.log(err);
+        return customer; //saved customer.
+    });
 }
+
+exports.getAllCustomer = function getAllCustomers(req, res){    
+    var page = req.query.p;
+    customer.find().skip(page*10).limit(10).find(function(err,result){
+        if(err)
+            return res.send('error', {
+                status: 500
+            });
+        customer.count(function(err,count){
+             return res.status(200).json({"data" : result, "count" :count});
+        })
+       
+    }
+    );
+};
+
