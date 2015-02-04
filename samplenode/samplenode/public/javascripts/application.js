@@ -43,8 +43,9 @@ function refreshCustomerList()
         });
         template = template + h + '</table>';
         $('div.list').html(template);
-        $('div.list').append("Total: " +response.count)
         totalRecords = response.count;
+        $("#pageNumber").val(pageCounter * 1)
+        $('#TotalRecords').html("Total:"+totalRecords)
     });
 }
 $(document).on("click",'.edit-customer',function(ev){
@@ -75,7 +76,8 @@ $(document).on("click",'.remove-customer',function(ev){
 });
 
 
-$(document).on('click','input.pre',function(ev){
+$(document).on('click','a.pre',function(ev){
+    ev.preventDefault();
     pageCounter--;
     if(pageCounter < 0)
     {
@@ -83,7 +85,8 @@ $(document).on('click','input.pre',function(ev){
     }
     refreshCustomerList();
 });
-$(document).on('click','input.next',function(ev){
+$(document).on('click','a.next',function(ev){
+    ev.preventDefault();
     pageCounter++;
     var totalPages = Math.ceil(totalRecords/10);
     if(pageCounter >= totalPages)
@@ -92,3 +95,32 @@ $(document).on('click','input.next',function(ev){
         pageCounter = 0;
     refreshCustomerList();
 });
+$(document).on("click","#goToPage",function(ev){
+    ev.preventDefault();
+    pageCounter = $.trim($("#pageNumber").val());
+    refreshCustomerList();
+});
+$(document).on("click","input#FindCustomer",function(ev){
+    var valueToSearch = $.trim($("#searchText").val());
+    var whereToSearch = $("#searchDdl").val();
+    var filter ={ "column" : whereToSearch,"value": valueToSearch}
+    FindCustomerBasedOnCriteria(filter)
+});
+function FindCustomerBasedOnCriteria(filter)
+{    
+    pageCounter = 0;
+    $.post('/findcustomers?p='+pageCounter,filter,function(response){
+        var template = '<table class="table table-striped">';
+        var h ='';
+        if(response.data.length == 0)
+            return 0;
+        response.data.forEach(function(i,e){ 
+            h += '<tr><td>'+i.fname+'</td><td>'+i.lname+'</td><td>'+i.email+'</td><td><td><button class="btn btn-lg btn-primary edit-customer" type="button" data-cid='+i._id+'>Edit</button><button class="btn btn-lg btn-danger remove-customer" type="button" data-cid='+i._id+'>Remove</button></td></tr>'
+        });
+        template = template + h + '</table>';
+        $('div.list').html(template);
+        totalRecords = response.count;
+        $("#pageNumber").val(pageCounter * 1)
+        $('#TotalRecords').html("Total:"+totalRecords)
+    });
+}

@@ -18,4 +18,8 @@ router.get('/getsingle',function(req,res){
 router.get('/deletesingle',function(req,res){
    return customerRepo.deleteSingleCustomer(req,res); 
 });
+router.post('/findcustomers',function(req,res){
+   return customerRepo.findCustomers(req,res); 
+});
+
 module.exports = router;

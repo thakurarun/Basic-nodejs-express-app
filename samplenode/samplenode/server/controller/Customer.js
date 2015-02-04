@@ -3,9 +3,8 @@ var mongoose = require('mongoose')
 var customer = require('../model/CustomerModel');
 
 exports.insertOrUpdateCustomer = function (_Customer,callback){ 
-    if(_Customer.cid != '')
+    if(_Customer.cid != undefined)
     { 
-        console.log(_Customer.cid)
         customer.findByIdAndUpdate(_Customer.cid, _Customer, {upsert:true},function(err,customer){
             if(err)
                 return console.log(err);
@@ -23,7 +22,7 @@ exports.insertOrUpdateCustomer = function (_Customer,callback){
 
 exports.getAllCustomer = function (req, res){    
     var page = req.query.p;
-    customer.find().skip(page*10).limit(10).find(function(err,result){
+    customer.find().sort({'fname':1}).skip(page*10).limit(10).find(function(err,result){
         if(err)
             return res.send('error', {
                 status: 500
@@ -57,6 +56,22 @@ exports.deleteSingleCustomer = function (req, res){
         return res.status(200).json({"data" : result, "count" :1});
     });
 };
-
+exports.findCustomers = function (req, res){    
+    var page = req.query.p;
+    var filter = req.body;
+    var col = filter.column;
+    customer.find({"lname":filter.value}).limit(10).find(function(err,result){
+        if(err)
+            return res.send('error', {
+                status: 500
+            });
+        customer.find({"lname":filter.value}).count(function(err,count){
+            console.log(filter.value);
+             return res.status(200).json({"data" : result, "count" :count});
+        })
+       
+    }
+    );
+};
 
 

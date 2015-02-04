@@ -13,7 +13,9 @@
 input::-ms-clear {
     display: none;
 }
-
+a{
+    cursor: pointer;
+}
 .btn {
     margin: 2px;
 }

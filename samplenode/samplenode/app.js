@@ -16,6 +16,8 @@ console.log('sever started')
 //run window console
 //set debug=app & node .\bin\www
 //https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/ --git helper
+//mongoimport --host 127.0.0.1 --port 27017 --collection customers --db Customer --file "path to json file mock.json" --jsonArray [data import eg]
+
 //127.0.0.1:59759
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
