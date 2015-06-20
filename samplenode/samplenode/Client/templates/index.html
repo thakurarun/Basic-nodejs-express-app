@@ -1,0 +1,80 @@
+<!--
+<html ng-app="phonecatApp">
+
+<head>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-route/angular-route.min.js"></script>
+    <script src="/phonecatApp.js"></script>
+</head>
+
+<body ng-controller="PhoneListCtrl">
+
+    <ul>
+        <li ng-repeat="phone in phones">
+            <span>{{phone.name}}</span>
+            <p>{{phone.snippet}}</p>
+        </li>
+    </ul>
+
+</body>
+
+</html>
+
+-->
+<!DOCTYPE html>
+<html ng-app="phonecatApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/Bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/Bootstrap/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+      <script src="/angular/angular.min.js"></script>
+    <script src="/angular-route/angular-route.min.js"></script>
+    <script src="/phonecatApp.js"></script>
+    <script type="text/javascript" src="/javascripts/Bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="/javascripts/textClear.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.validation.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="page-header">Register yourself</h3>
+        <form id="customerForm" role="form" autocomplete="off">
+            <input id="cid" type="hidden" value="" placeholder="first name" required="required" class="span3">
+            <br>
+            <input id="fname" type="text" value="" placeholder="first name" required="required" class="span3">
+            <br>
+            <input id="lname" type="text" value="" placeholder="last name" required="required" class="span3">
+            <br>
+            <input id="email" type="email" value="" placeholder="email" required="required" class="span3">
+            <br>
+            <input id="registerBtn" type="button" value="Register" class="btn">
+        </form>
+        <div class="filter">
+            <select id="searchDdl" style="margin:10px;">
+                <option value="fname">First Name</option>
+                <option value="lname">Last Name</option>
+                <option value="email">Email</option>
+                <option value="full">Full</option>
+            </select>
+            <input id="searchText" type="text" placeholder="search things..." style="margin:10px;" class="span2">
+            <input id="FindCustomer" type="button" value="Find" style="margin:10px;" class="btn">
+        </div>
+        <div class="list"></div><span id="TotalRecords" class="label label-info"></span></div>
+    <ul class="pager">
+        <li><a class="pre">Previous</a></li>
+        <li>
+            <input id="pageNumber" type="text" placeholder="Page #" style="margin-bottom:1px;" class="span2">
+            <input id="goToPage" type="button" value="go" class="btn">
+        </li>
+        <li><a class="next">Next</a></li>
+        <li></li>
+    </ul>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+</body>
+
+</html>

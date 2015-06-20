@@ -1,11 +1,7 @@
 var User = {
     title : 'Customer',
-    LoginTitleText : 'Register yourself',
-    testFunct : testFunction
+    LoginTitleText : 'Register yourself'
 }
 
-function testFunction()
-{
-    console.log('function called');
-}
+
 module.exports = User;

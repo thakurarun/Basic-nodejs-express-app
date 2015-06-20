@@ -15,7 +15,7 @@ $(document).on('click','#registerBtn', function(event){
     userDetails.fname = form[0].fname.value;
     userDetails.lname = form[0].lname.value;
     userDetails.email = form[0].email.value;
-    $.post('/postuser',userDetails,function(res){
+    $.post('/api/postuser',userDetails,function(res){
         if(res.success)
         {
             refreshCustomerList();
@@ -33,7 +33,7 @@ function ResetForm()
 }
 function refreshCustomerList()
 {    
-    $.get('/listcustomer?p='+pageCounter,function(response){
+    $.get('/api/listcustomer?p='+pageCounter,function(response){
         var template = '<table class="table table-striped">';
         var h ='';
         if(response.data.length == 0)
@@ -51,7 +51,7 @@ function refreshCustomerList()
 $(document).on("click",'.edit-customer',function(ev){
     ev.stopPropagation();
     var id = this.getAttribute('data-cid')
-    $.get('/getsingle?id='+id,function(response){
+    $.get('/api/getsingle?id='+id,function(response){
         if(response.count == 1) //valid data, method should return only one record per request.
         {
             FillForm(response.data[0])
@@ -70,7 +70,7 @@ function FillForm(data){
 $(document).on("click",'.remove-customer',function(ev){
     ev.stopPropagation();
     var id = this.getAttribute('data-cid')
-    $.get('/deletesingle?id='+id,function(response){
+    $.get('/api/deletesingle?id='+id,function(response){
         refreshCustomerList();
     })
 });
@@ -109,7 +109,7 @@ $(document).on("click","input#FindCustomer",function(ev){
 function FindCustomerBasedOnCriteria(filter)
 {    
     pageCounter = 0;
-    $.post('/findcustomers?p='+pageCounter,filter,function(response){
+    $.post('/api/findcustomers?p='+pageCounter,filter,function(response){
         var template = '<table class="table table-striped">';
         var h ='';
         if(response.data.length == 0)
